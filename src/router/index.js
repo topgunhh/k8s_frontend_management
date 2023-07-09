@@ -70,6 +70,19 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
+
+  {
+    path: '/k8s-resource',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/k8s_resource/complex-table.vue'),
+        name: 'Icons',
+        meta: { title: 'K8s Resource', icon: 'icon', noCache: true }
+      }
+    ]
+  },
   {
     path: '/',
     component: Layout,
