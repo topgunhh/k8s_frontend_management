@@ -48,6 +48,7 @@
           <span>{{ row.IP }}</span>
         </template>
       </el-table-column>
+
       <el-table-column label="STATUS" width="110px" align="center">
         <template slot-scope="{row}">
           <el-tag :type="row.readyif | statusFilter">
@@ -57,35 +58,66 @@
 
         </template>
       </el-table-column>
+
       <el-table-column label="ROLES" width="110px">
-        <template slot-scope="" />
+        <template slot-scope="{row}">
+          <span>{{ row.roles }}</span>
+          <!--            <span :type="row.roles | statusFilter"></span>-->
+
+        </template>
       </el-table-column>
+
       <el-table-column label="AGE" width="110px">
-        <template slot-scope="" />
+        <template slot-scope="{row}">
+          <span>{{ row.age }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="VERSION" width="110px">
-        <template slot-scope="" />
+        <template slot-scope="{row}">
+          <span>{{ row.version }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="INTERNAL-IP" width="110px">
-        <template slot-scope="" />
+        <template slot-scope="{row}">
+          <span>{{ row.internal_ip }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="EXTERNAL-IP" width="110px">
-        <template slot-scope="{}" />
+        <template slot-scope="{row}">
+          <span>{{ row.external_ip }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="OS-IMAGE" width="110px">
-        <template slot-scope="{}" />
+        <template slot-scope="{row}">
+          <span>{{ row.os_image }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="KERNEL-VERSION" width="110px">
-        <template slot-scope="{}" />
+        <template slot-scope="{row}">
+          <span>{{ row.kernel_version }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="CONTAINER-RUNTIME" width="110px">
-        <template slot-scope="{}" />
+        <template slot-scope="{row}">
+          <span>{{ row.container_runtime }}</span>
+        </template>
       </el-table-column>
 
       <el-table-column label="podNum" width="110px">
         <template slot-scope="{row}">
           <span v-if="row.podNum" class="link-type" @click="handlePodNumFetchPv(row.podNum)">{{ row.podNum }}</span>
           <span v-else>0</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="LabelGroup" width="190px">
+        <template slot-scope="{row}">
+          <ul id="xxxx" style="list-style-type:none;padding:0px">
+            <li v-for="(value,name,index) in row.LabelPairs" :key="value.id">
+              {{ index }}.{{ name }}:{{ value }}
+
+            </li>
+          </ul>
         </template>
       </el-table-column>
 
@@ -231,6 +263,9 @@ export default {
         title: '',
         type: '',
         status: 'published'
+      },
+      k8sNodeObj: {
+        scheduleStatus: undefined
       },
       dialogFormVisible: false,
       dialogStatus: '',

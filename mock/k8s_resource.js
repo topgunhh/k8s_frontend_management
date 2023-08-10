@@ -13,15 +13,24 @@ for (let m = 0; m < count; m++) {
     name: 'k8s_node_@first',
     'readyif|1': ['Not Ready', 'Ready'],
     'status|1': ['published', 'draft'],
+    'scheduleStatus|1': true,
     IP: '@ip',
-    roles: '@first',
-    age: '@title(5, 10)',
-    version: 'mock data',
-    internal_ip: baseContent,
-    external_ip: '@float(0, 100, 2, 2)',
-    os_image: '@integer(1, 3)',
-    kernel_version: ['CN', 'US', 'JP', 'EU'],
-    container_runtime: ['published', 'draft'],
+    'roles|1': ['worker', 'control-plane', 'master'],
+    'LabelPairs|2-6': {
+      'disk': 'ssd',
+      'gpu': 'true',
+      'ds_gray': 'need',
+      'nic_10gbi': 'yes',
+      'optane_ready': 'yes',
+      'infiniband_ready': 'yes'
+    },
+    age: '@integer(0,100)',
+    version: 'v1.23.0',
+    internal_ip: '@ip',
+    external_ip: '<none>',
+    os_image: 'Ubuntu 22.04.1 LTS',
+    kernel_version: '5.15.0-75-generic',
+    container_runtime: 'docker://20.10.21',
     podNum: '@natural(60,200)'
   }))
 }
@@ -80,10 +89,13 @@ module.exports = [
         code: 20000,
         data: {
           podNumData: [
-            { key: 'NUM', pv: 1524 },
-            { key: 'mobile', pv: 1024 },
-            { key: 'ios', pv: 1024 },
-            { key: 'android', pv: 1024 }
+            { key: 'namespace', pv: 'default' },
+            { key: 'name', pv: 1024 },
+            { key: 'cpuRequest', pv: 1024 },
+            { key: 'cpuLimit', pv: 1024 },
+            { key: 'memRequest', pv: 1024 },
+            { key: 'memLimit', pv: 1024 },
+            { key: 'cpuLimit', pv: 1024 }
           ]
         }
       }
