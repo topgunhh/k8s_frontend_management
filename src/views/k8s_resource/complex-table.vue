@@ -114,7 +114,7 @@
         <template slot-scope="{row}">
           <ul id="xxxx" style="list-style-type:none;padding:0px">
             <li v-for="(value,name,index) in row.LabelPairs" :key="value.id">
-              {{ index }}.{{ name }}:{{ value }}
+              {{ index }}.<el-tag type="success">{{ name }}</el-tag>:<el-tag>{{ value }}</el-tag>
 
             </li>
           </ul>
